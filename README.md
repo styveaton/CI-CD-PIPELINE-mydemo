@@ -4,6 +4,7 @@ This is an example ready-to-deploy java web application built for Tomcat using M
 
 Jenkins Repo and key download command:
 sudo wget -O /etc/yum.repos.d/jenkins.repo https://pkg.jenkins.io/redhat-stable/jenkins.repo
+
 sudo rpm --import https://pkg.jenkins.io/redhat-stable/jenkins.io.key
 
 Maven download command:
