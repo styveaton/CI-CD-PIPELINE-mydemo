@@ -21,4 +21,4 @@ wget https://binaries.sonarsource.com/Distribution/sonarqube/sonarqube-6.7.7.zip
 wget https://binaries.sonarsource.com/Distribution/sonar-scanner-cli/sonar-scanner-cli-4.1.0.1829-linux.zip
 
 
-this is pollscm testing
+
