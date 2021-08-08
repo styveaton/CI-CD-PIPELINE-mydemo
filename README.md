@@ -12,4 +12,12 @@ sudo rpm --import https://pkg.jenkins.io/redhat-stable/jenkins.io.key
 
 wget https://mirrors.gigenet.com/apache/maven/maven-3/3.8.1/binaries/apache-maven-3.8.1-bin.tar.gz
 
+#Sonarqube Download Command:
+
+wget https://binaries.sonarsource.com/Distribution/sonarqube/sonarqube-6.7.7.zip
+
+#Sonarqube scanner download command:
+
+wget https://binaries.sonarsource.com/Distribution/sonar-scanner-cli/sonar-scanner-cli-4.1.0.1829-linux.zip
+
 
