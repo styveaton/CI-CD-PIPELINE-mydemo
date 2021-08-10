@@ -20,5 +20,38 @@ wget https://binaries.sonarsource.com/Distribution/sonarqube/sonarqube-6.7.7.zip
 
 wget https://binaries.sonarsource.com/Distribution/sonar-scanner-cli/sonar-scanner-cli-4.1.0.1829-linux.zip
 
+#TOMCAT download command:
 
+wget https://mirrors.ocf.berkeley.edu/apache/tomcat/tomcat-8/v8.5.69/bin/apache-tomcat-8.5.69.tar.gz
+
+#TOMCAT user details:
+  <role rolename="manager-script"/>
+  <role rolename="manager-gui"/>
+  <user username="tomcat" password="tomcat" roles="manager-script,manager-gui"/>
+  
+  
+#Sample Pipeline Script.
+
+pipeline {
+      agent any
+      stages {
+            stage('clone') {
+                  steps {
+                        echo 'cloning GITHUB repository'
+                    
+                  }
+            }
+            stage('Build') {
+                  steps {
+                        echo 'Building Maven Project'
+                  }
+            }
+            stage('Deploy') {
+                  steps {
+                        echo "Deploying the application"
+                  }
+            }
+          
+      }
+}
 
