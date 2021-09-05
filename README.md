@@ -55,4 +55,51 @@ pipeline {
       }
 }
 
-#Testing jenkins-ansible integration.
+KUBERNETES INSTALLATION ANS SETUP {URL and Commands}:
+
+Docker installation URL:
+yum install -y -q yum-utils device-mapper-persistent-data lvm2 > /dev/null 2>&1
+yum-config-manager --add-repo https://download.docker.com/linux/centos/docker-ce.repo > /dev/null 2>&1
+yum install -y -q docker-ce >/dev/null 2>&1
+
+Disable SELinux:
+setenforce 0
+sed -i --follow-symlinks 's/^SELINUX=enforcing/SELINUX=disabled/' /etc/sysconfig/selinux
+
+Disable swap:
+sed -i '/swap/d' /etc/fstab
+swapoff -a
+
+Update sysctl settings for Kubernetes networking:
+cat >> /etc/sysctl.d/kubernetes.conf <<EOF
+net.bridge.bridge-nf-call-ip6tables = 1
+net.bridge.bridge-nf-call-iptables = 1
+EOF
+sysctl --system
+                                           
+Add yum repository for kubernetes packages:
+cat >>/etc/yum.repos.d/kubernetes.repo<<EOF
+[kubernetes]
+name=Kubernetes
+baseurl=https://packages.cloud.google.com/yum/repos/kubernetes-el7-x86_64
+enabled=1
+gpgcheck=1
+repo_gpgcheck=1
+gpgkey=https://packages.cloud.google.com/yum/doc/yum-key.gpg
+        https://packages.cloud.google.com/yum/doc/rpm-package-key.gpg
+EOF
+  
+Install Kubernetes:
+yum install -y kubeadm-1.15.6-0.x86_64 kubelet-1.15.6-0.x86_64 kubectl-1.15.6-0.x86_64
+  
+Initialize Kubernetes cluster on MASTER node using command:
+kubeadm init --apiserver-advertise-address=<master-node-private-ip> --pod-network-cidr=192.168.0.0/16
+  
+Run the following command to copy kube config file:
+mkdir /home/kubeuser/.kube
+cp /etc/kubernetes/admin.conf /home/kubeuser/.kube/config
+chown -R kubeuser:kubeuser /home/kubeuser/.kube
+  
+install Calico network connector using command as kubeuser:
+su - kubeuser
+kubectl create -f https://docs.projectcalico.org/v3.9/manifests/calico.yaml
