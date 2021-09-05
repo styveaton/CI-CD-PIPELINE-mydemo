@@ -58,11 +58,15 @@ pipeline {
 KUBERNETES INSTALLATION ANS SETUP {URL and Commands}:
 
 Docker installation URL:
+
 yum install -y -q yum-utils device-mapper-persistent-data lvm2 > /dev/null 2>&1
+
 yum-config-manager --add-repo https://download.docker.com/linux/centos/docker-ce.repo > /dev/null 2>&1
+
 yum install -y -q docker-ce >/dev/null 2>&1
 
 Disable SELinux:
+
 setenforce 0
 sed -i --follow-symlinks 's/^SELINUX=enforcing/SELINUX=disabled/' /etc/sysconfig/selinux
 
@@ -71,6 +75,7 @@ sed -i '/swap/d' /etc/fstab
 swapoff -a
 
 Update sysctl settings for Kubernetes networking:
+
 cat >> /etc/sysctl.d/kubernetes.conf <<EOF
 net.bridge.bridge-nf-call-ip6tables = 1
 net.bridge.bridge-nf-call-iptables = 1
