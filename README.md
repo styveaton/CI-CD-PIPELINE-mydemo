@@ -20,11 +20,11 @@ wget https://binaries.sonarsource.com/Distribution/sonarqube/sonarqube-6.7.7.zip
 
 wget https://binaries.sonarsource.com/Distribution/sonar-scanner-cli/sonar-scanner-cli-4.1.0.1829-linux.zip
 
-#TOMCAT download command:
+# TOMCAT download command:
 
 wget https://mirrors.ocf.berkeley.edu/apache/tomcat/tomcat-8/v8.5.69/bin/apache-tomcat-8.5.69.tar.gz
 
-#TOMCAT user details:
+# TOMCAT user details:
   <role rolename="manager-script"/>
   <role rolename="manager-gui"/>
   <user username="tomcat" password="tomcat" roles="manager-script,manager-gui"/>
@@ -55,7 +55,7 @@ pipeline {
       }
 }
 
-KUBERNETES INSTALLATION ANS SETUP {URL and Commands}:
+# KUBERNETES INSTALLATION ANS SETUP {URL and Commands}:
 
 Docker installation URL:
 
@@ -108,3 +108,9 @@ chown -R kubeuser:kubeuser /home/kubeuser/.kube
 install Calico network connector using command as kubeuser:
 su - kubeuser
 kubectl create -f https://docs.projectcalico.org/v3.9/manifests/calico.yaml
+  
+  
+# NAGIOS XI DOWNLOAD URL:
+
+curl https://assets.nagios.com/downloads/nagiosxi/install.sh | sh
+  
