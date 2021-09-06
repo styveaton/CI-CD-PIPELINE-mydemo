@@ -114,3 +114,11 @@ kubectl create -f https://docs.projectcalico.org/v3.9/manifests/calico.yaml
 
 curl https://assets.nagios.com/downloads/nagiosxi/install.sh | sh
   
+# Download NCPA package command:
+
+rpm -Uvh https://assets.nagios.com/downloads/ncpa/ncpa-latest.el6.x86_64.rpm
+  
+# Download check_docker plugin command:
+
+wget http://54.209.36.115/nagiosxi/includes/configwizards/docker/plugins/check_docker.py
+
