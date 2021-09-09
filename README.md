@@ -109,6 +109,52 @@ install Calico network connector using command as kubeuser:
 su - kubeuser
 kubectl create -f https://docs.projectcalico.org/v3.9/manifests/calico.yaml
   
+# application-deployment.yml
+ 
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: application-deployment
+spec:
+  selector:
+    matchLabels:
+      app: application-deployment
+  replicas: 2
+  strategy:
+    type: RollingUpdate
+    rollingUpdate:
+      maxSurge: 1
+      maxUnavailable: 1
+
+  template:
+    metadata:
+      labels:
+        app: application-deployment
+    spec:
+      containers:
+      - name: application-deployment
+        image: bhaskerrajput/application-image
+        imagePullPolicy: Always
+        ports:
+        - containerPort: 8080
+
+# application-service.yml
+  
+apiVersion: v1
+kind: Service
+metadata:
+  name: application-service
+  labels:
+    app: application-deployment
+spec:
+  selector:
+    app: application-deployment
+  type: LoadBalancer
+  ports:
+    - port: 8080
+      targetPort: 8080
+      nodePort: 30000
+  
   
 # NAGIOS XI DOWNLOAD URL:
 
