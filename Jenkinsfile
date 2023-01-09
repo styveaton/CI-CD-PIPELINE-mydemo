@@ -1,11 +1,10 @@
 pipeline {
       agent any
-	  
-	  tools{
-	      maven "M2_HOME"
-		  
-		}
-		
+      
+      tools {
+          maven "M2_HOME"
+            }
+      
       stages {
             stage('Build Application') {
                   steps {
@@ -13,23 +12,12 @@ pipeline {
                     
                   }
             
-            post {
-			    success {
-                    echo "Strating the archive process"
-					archiveArtifacts artifacts: '**/*.war'
-					
-			       }
-				   
-				}
-    		}
-
-               stage('Deploy application') {
-                  steps {
-                        build job: 'APPLICATION-DEPLOYMENT-JOB'
-                    
-                  }
-
-		  }		  
-          
+           post {
+               success {
+                  echo "starting the archiv process"
+                  archiveArtifacts artifacts:'**/*.war
+                       }
+                }
+            }
       }
 }
